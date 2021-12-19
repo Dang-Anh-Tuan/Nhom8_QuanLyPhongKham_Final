@@ -29,11 +29,4 @@ public interface BacSyRepo extends JpaRepository<BacSy, Integer> {
 
 	@Query(value = "SELECT * FROM bac_sy WHERE is_delete = 0 LIMIT :start, :to ", nativeQuery = true)
 	public List<BacSy> findByPage(@RequestParam("start") long start, @RequestParam("to") long to);
-
-	
-	// tinh luong
-	@Query(value = "CALL get_salary_doctor(:did, :sdate, :edate);", nativeQuery = true)
-	public List<Float> tinhLuongBacSy(@RequestParam("did") int did, @RequestParam("sdate") Date sdate,
-			@RequestParam("edate") Date edate);
-
 }

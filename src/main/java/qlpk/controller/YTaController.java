@@ -125,15 +125,4 @@ public class YTaController {
 		redirectView.setUrl("/404");
 		return redirectView;
 	}
-
-
-	@GetMapping("/yta/luong")
-	public String tinhLuongYta(@RequestParam int id, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date sdate, @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date edate, Model model){
-		List<YtaLuong> listLuong = yTaService.tinhLuongYta(sdate, edate);
-
-		model.addAttribute("listLuong", listLuong);
-
-
-		return "QuanLyNhanSu/Salary";
-	}
 }

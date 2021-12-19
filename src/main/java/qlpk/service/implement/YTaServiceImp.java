@@ -25,7 +25,7 @@ public class YTaServiceImp implements YTaService{
 		this.yTaRepo = yTaRepo;
         this.userRepo = userRepo;
 	}
-
+    final long pageSize = 5;
     @Override
     public List<YTa> findAll() {
         return yTaRepo.findYTaByIsDelete(false);
@@ -59,19 +59,6 @@ public class YTaServiceImp implements YTaService{
     @Override
     public Optional<YTa> getById(int id) {
         return yTaRepo.findYTaByIdAndIsDelete(id, false);
-    }
-
-    @Override
-    public List<YtaLuong> tinhLuongYta(Date sdate, Date edate) {
-        List<YTa> listYta = findAll();
-        List<YtaLuong> listYtaLuong = new ArrayList<>();
-        for(YTa yta:listYta){
-            YtaLuong ytaLuong = new YtaLuong();
-            ytaLuong.setYta(yta);
-            ytaLuong.setLuong(yTaRepo.tinhLuongYta(yta.getId(), sdate, edate).get(0));
-            listYtaLuong.add(ytaLuong);
-        }
-        return listYtaLuong;
     }
 
     @Override

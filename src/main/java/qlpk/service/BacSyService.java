@@ -27,8 +27,5 @@ public interface BacSyService {
     long getTotalPage();
     
     List<BacSy> getByPage(long currentPage);
-    
-    // for tinh luong
-    
-    List<BacSyLuong> tinhLuongBacSy(Date sdate, Date edate);
+
 }

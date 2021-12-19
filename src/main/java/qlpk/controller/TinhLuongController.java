@@ -14,18 +14,16 @@ import qlpk.modelUtil.BacSyLuong;
 import qlpk.modelUtil.DateLuong;
 import qlpk.modelUtil.YtaLuong;
 import qlpk.service.BacSyService;
+import qlpk.service.LuongThuongService;
 import qlpk.service.YTaService;
 
 @Controller
 public class TinhLuongController {
-
+//	@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 	@Autowired
-	private BacSyService bacSyService;
-	@Autowired
-	private YTaService yTaService;
-	public TinhLuongController(BacSyService bacSyService, YTaService yTaService){
-		this.bacSyService = bacSyService;
-		this.yTaService = yTaService;
+	private  LuongThuongService luongThuongService;
+	public TinhLuongController(LuongThuongService luongThuongService){
+		this.luongThuongService = luongThuongService;
 	}
 
 	@GetMapping("/qlns/xemluong-bs")
@@ -39,7 +37,7 @@ public class TinhLuongController {
 	public String resultTinhLuong(@ModelAttribute("dateLuong") DateLuong dateLuong, Model model) {
 		System.out.println(new SimpleDateFormat("dd/MM/yyyy").format(dateLuong.getNgayBD()));
 		System.out.println(new SimpleDateFormat("dd/MM/yyyy").format(dateLuong.getNgayKT()));
-		List<BacSyLuong>  dsBacSyLuong = bacSyService.tinhLuongBacSy(dateLuong.getNgayBD(), dateLuong.getNgayKT());
+		List<BacSyLuong>  dsBacSyLuong = luongThuongService.tinhLuongBacSy(dateLuong.getNgayBD(), dateLuong.getNgayKT());
 		model.addAttribute("dsBacSiLuong", dsBacSyLuong);
 		// model add ds dsBacSiLuong
 		return "QuanLyNhanSu/SalaryResultBacSi";
@@ -57,7 +55,7 @@ public class TinhLuongController {
 	public String resultTinhLuongYTa(@ModelAttribute("dateLuong") DateLuong dateLuong, Model model) {
 		System.out.println(new SimpleDateFormat("dd/MM/yyyy").format(dateLuong.getNgayBD()));
 		System.out.println(new SimpleDateFormat("dd/MM/yyyy").format(dateLuong.getNgayKT()));
-		List<YtaLuong> dsYtaLuong = yTaService.tinhLuongYta(dateLuong.getNgayBD(), dateLuong.getNgayKT());
+		List<YtaLuong> dsYtaLuong = luongThuongService.tinhLuongYta(dateLuong.getNgayBD(), dateLuong.getNgayKT());
 
 		model.addAttribute("dsYTaLuong", dsYtaLuong);
 		// model add ds dsBacSiLuong

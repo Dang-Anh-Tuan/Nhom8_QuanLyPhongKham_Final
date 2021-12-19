@@ -84,17 +84,5 @@ public class BacSyServiceImp implements BacSyService {
 	
 	// for tinh luong
 	
-	@Override
-	public List<BacSyLuong> tinhLuongBacSy(Date sdate, Date edate) {
-		List<BacSy> listBacSi = getAll();
-		List<BacSyLuong> listBacSiLuong = new ArrayList<>();
-		for (BacSy bacSy : listBacSi) {
-			BacSyLuong bacSyLuong = new BacSyLuong();
-			bacSyLuong.setBacSy(bacSy);
-			bacSyLuong.setLuong(bacSyRepo.tinhLuongBacSy(bacSy.getId(), sdate, edate).get(0));
-			listBacSiLuong.add(bacSyLuong);
-		}
-		return listBacSiLuong;
-	}
 
 }

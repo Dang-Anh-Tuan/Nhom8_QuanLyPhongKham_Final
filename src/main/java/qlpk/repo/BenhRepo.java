@@ -21,6 +21,6 @@ public interface BenhRepo extends JpaRepository<Benh, Integer> {
 	List<Benh> findBenhByIsDelete(boolean isDelete);
 
 	@Query(value = "CALL list_benh(:bid, :sdate, :edate);", nativeQuery = true)
-	public List<Integer> thongKeBenh(@RequestParam("bid") int bid, @RequestParam("sdate") Date sdate,
+	List<Integer> thongKeBenh(@RequestParam("bid") int bid, @RequestParam("sdate") Date sdate,
 			@RequestParam("edate") Date edate);
 }
