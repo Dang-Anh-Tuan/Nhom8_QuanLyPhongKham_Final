@@ -42,11 +42,17 @@ public class YTaController {
 
 	@GetMapping("/qlns/yta/ds-yta")
 	public String showListYTa(Model model) {
-		List<YTa> dsYTa = yTaService.findAll();
+		return "redirect:/qlns/yta/ds-yta/1";
+	}
+	@GetMapping("/qlns/yta/ds-yta/{page}")
+	public String showListYTaPage(@PathVariable("page") long currentPage, Model model){
+		long totalPage = yTaService.getTotalPage();
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("currentPage", currentPage);
+		List<YTa> dsYTa = yTaService.getByPage(currentPage);
 		model.addAttribute("dsYTa", dsYTa);
 		return "QuanLyNhanSu/ListNurse";
 	}
-
 	@GetMapping("/qlns/yta/add")
 	public String showAddFormYTa(Model model) {
 		YTa yTa = new YTa();
@@ -94,7 +100,7 @@ public class YTaController {
 
 	@PostMapping("/qlns/yta/edit/{id}")
 	public String handleEditYTa(@PathVariable int id, @Valid @ModelAttribute("yTa") YTa yTa, BindingResult result,
-								@Valid @ModelAttribute("taikhoan") UserDTO userDTO, Model model, Errors errors) {
+								@Valid @ModelAttribute("taikhoan") UserDTO userDTO /*, Model model*/, Errors errors) {
 
 		if (errors.hasErrors()) {
 //			Optional<YTa> optYTa = yTaService.getById(id);
